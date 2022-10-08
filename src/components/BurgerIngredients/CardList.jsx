@@ -1,26 +1,18 @@
-import React from 'react';
-import Style from './CardList.module.css';
-import Card from "./Card.jsx";
-import data from '../../utils/data';
-import PropTypes from 'prop-types';
-import {propType} from "../../utils/propTypes";
+import Card from "./Card";
+import Styles from "./CardList.module.css";
 
-
-const CardList = (props) => {
-    const newArr = data.filter(el => (el.type === props.type))
+function CardList({data, type, name}) {
     return (
-        <div id={props.type} >
-            <h2 className={`${Style.titleList}
-                    pt-8 text text_type_main-default`}>{props.text}</h2>
-            <ul className={`${Style.columns} pl-1`}>
-                {newArr.map(element => (
-                    <Card key={element._id} {...element}/>
+        <>
+            <h2 className={'text text_type_main-medium'}>{name}</h2>
+            <ul className={`${Styles.list} pt-6`}>
+                {data.map((card) => (
+                    card.type === type &&
+                    <Card image={card.image} name={card.name} price={card.price} key={card._id}/>
                 ))}
             </ul>
-        </div>
+        </>
     )
 }
-CardList.propTypes = {
-    props: PropTypes.arrayOf(propType.isRequired)
-}
+
 export default CardList;
