@@ -5,7 +5,7 @@
 }
 
 .container {
-    max-height: calc(100vh - 485px);
+  max-height: calc(100vh - 485px);
   margin: 0;
   padding-left: 0;
   display: flex;
@@ -39,3 +39,15 @@
     align-items: baseline;
     gap: 10px;
 }
+
+.container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .container::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+  }
+  
+  .container::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+  }
