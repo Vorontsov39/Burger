@@ -1,6 +1,6 @@
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useState} from "react";
-import CardList from "./CardList";
+import CardList from "../CardList/CardList";
 import PropTypes from 'prop-types';
 import {propType} from "../../utils/propTypes";
 import styles from './BurgerIngredients.module.css';

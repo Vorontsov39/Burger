@@ -1,4 +1,4 @@
-import Card from "./Card";
+import Card from "../Card/Card";
 import styles from "./CardList.module.css";
 
 function CardList({data, type, name}) {
