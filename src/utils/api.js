@@ -1,13 +1,21 @@
-export const api = {
-    url: 'https://norma.nomoreparties.space/api/ingredients',
-    headers: {
-        'Content-Type': 'aplication.json'
-    }
-};
+const BURGER_URL = 'https://norma.nomoreparties.space/api/ingredients'
 
-export const parseResponse = (res) => {
-    if (res.ok) {
-        return res.json();
+const checkResponse = (response) => {
+    if (response.ok) {
+        return response.json();
     }
-    return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
+    return Promise.reject(`Ошибка: ${response.status}`)
+}
+
+const request = (url, options) => {
+    return fetch(url, options).then(checkResponse)
+}
+
+export const getIngredients = () => {
+    return  request(BURGER_URL, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
 }
