@@ -17,6 +17,7 @@ function App() {
             .catch(console.log)
     }, [])
 
+      console.log(ingredients);
   return (
     <div className={styles.App}>
     <AppHeader/>
