@@ -1,4 +1,4 @@
-const BURGER_URL = 'https://norma.nomoreparties.space/api/ingredients'
+const BURGER_URL = 'https://norma.nomoreparties.space/api'
 
 const checkResponse = (response) => {
     if (response.ok) {
@@ -12,10 +12,20 @@ const request = (url, options) => {
 }
 
 export const getIngredients = () => {
-    return  request(BURGER_URL, {
+    return  request(`${BURGER_URL}/ingredients`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
         }
+    })
+}
+
+export const makeOrder = (ingredients) => {
+    return request(`${BURGER_URL}/orders`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(ingredients)
     })
 }
