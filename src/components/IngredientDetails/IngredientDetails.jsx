@@ -1,7 +1,5 @@
 import styles from './IngredientDetails.module.css'
 import { propType } from '../../utils/propTypes';
-import {useEffect} from "react";
-
 
 function IngredientDetails({card}) {
     return (

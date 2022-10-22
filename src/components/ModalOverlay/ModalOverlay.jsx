@@ -1,15 +1,15 @@
 import styles from './ModalOverlay.module.css'
 import PropTypes from "prop-types";
 
-function ModalOverlay({toggleModal}) {
+function ModalOverlay({closeModal}) {
 
     return (
-        <div className={styles.modalOverlay} onClick={toggleModal}/>
+        <div className={styles.modalOverlay} onClick={closeModal}/>
     )
 }
 
 ModalOverlay.propTypes = {
-    toggleModal: PropTypes.func.isRequired
+    closeModal: PropTypes.func.isRequired
 };
 
 export default ModalOverlay

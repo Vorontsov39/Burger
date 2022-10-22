@@ -5,25 +5,44 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import styles from './App.module.css';
 import {getIngredients} from "../../utils/api";
 
-
+import {DataContext} from "../../context/dataContext";
 
 function App() {
   const [ingredients, setIngredients] = useState([])
+  const [selectedBun, setSelectedBun] = useState(null)
+    const [otherIngredients, setOtherIngredients] = useState([])
 
     useEffect(() => {
         getIngredients().then(res => {
-            setIngredients(res.data)
+          setIngredients(res.data)
+          const bun = res.data.find(item => item.type === 'bun')
+          setSelectedBun(bun)
         })
-            .catch(console.log)
-    }, [])
+        .catch((res) => {
+          console.log(res)
+      
+      })
+}, [])
 
-      console.log(ingredients);
+const addIngredientToCart = (ingredient) => {
+  if (ingredient.type === 'bun') {
+      setSelectedBun(ingredient)
+      return
+  }
+  setOtherIngredients([...otherIngredients, ingredient])
+}
+
+
   return (
     <div className={styles.App}>
     <AppHeader/>
     <main className={styles.main}>
-        <BurgerIngredients data={ingredients} />
-        <BurgerConstructor data={ingredients} />
+      
+    <BurgerIngredients data={ingredients} addIngredientToCart={addIngredientToCart}/>
+    <DataContext.Provider value={{ otherIngredients, selectedBun }}>
+
+        <BurgerConstructor />
+    </DataContext.Provider>
     </main>
 </div>
 );

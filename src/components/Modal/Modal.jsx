@@ -5,40 +5,35 @@ import {useEffect} from "react";
 import PropTypes from "prop-types";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
-function Modal({isOpen, toggleModal, children}) {
+function Modal({ closeModal, children}) {
     const modalRoot = document.getElementById('react-modals')
 
     useEffect(() => {
         const closeModalPressEsc = (e) => {
             if (e.key === 'Escape') {
-                toggleModal()
+                closeModal()
             }
         }
-        if (isOpen) {
             document.addEventListener('keyup', closeModalPressEsc)
             return () => {
                 document.removeEventListener('keyup', closeModalPressEsc)
-            }
+            
         }
-    }, [isOpen])
+    }, [closeModal])
 
 
     return ReactDOM.createPortal(
         
         <>
-            {
-                isOpen &&
                 <>
-                    <ModalOverlay toggleModal={toggleModal}/>
+                    <ModalOverlay toggleModal={closeModal}/>
                     <div className={styles.modal} onClick={event => event.stopPropagation()}>
-                        <button className={styles.button} type={"button"} onClick={toggleModal}>
+                        <button className={styles.button} type={"button"} onClick={closeModal}>
                             <CloseIcon type="primary"/>
                         </button>
                         {children}
                     </div>
                 </>
-
-            }
         </>
         ,
         modalRoot
@@ -46,7 +41,6 @@ function Modal({isOpen, toggleModal, children}) {
 }
 
 Modal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
     toggleModal: PropTypes.func.isRequired,
     children: PropTypes.element,
     overlay: PropTypes.element,

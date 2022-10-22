@@ -7,15 +7,15 @@ import styles from './BurgerIngredients.module.css';
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
-function BurgerIngredients({data}) {
+function BurgerIngredients({data, addIngredientToCart}) {
     const [current, setCurrent] = useState('Булки')
-    const [card, setCard] = useState({})
+    const [card] = useState({})
     const [isOpen, setIsOpen] = useState(false)
 
     const handeCardClick = (item) => {
-        setCard(item)
-        toggleModal()
+        addIngredientToCart(item)
     }
+
     const toggleModal = () => {
         setIsOpen(!isOpen)
     }
@@ -33,9 +33,9 @@ function BurgerIngredients({data}) {
                 <CardList data={data} name={'Соусы'} type={'sauce'} handeCardClick={handeCardClick}/>
                 <CardList data={data} name={'Начинки'} type={'main'} handeCardClick={handeCardClick}/>
             </div>
-            <Modal isOpen={isOpen} toggleModal={toggleModal}>
+            {isOpen && <Modal isOpen={isOpen} toggleModal={toggleModal}>
                 <IngredientDetails card={card}/>
-            </Modal>
+            </Modal>}
         </section>
     )
 }

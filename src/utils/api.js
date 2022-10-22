@@ -4,7 +4,7 @@ const checkResponse = (response) => {
     if (response.ok) {
         return response.json();
     }
-    return Promise.reject(`Ошибка: ${response.status}`)
+    return Promise.reject(response)
 }
 
 const request = (url, options) => {
@@ -15,7 +15,7 @@ export const getIngredients = () => {
     return  request(`${BURGER_URL}/ingredients`, {
         method: 'GET',
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
         }
     })
 }
